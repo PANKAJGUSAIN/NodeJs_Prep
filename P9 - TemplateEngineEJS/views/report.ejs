@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>
+        <%= title %>
+    </title>
 </head>
+
 <body>
-    <h2> Report </h2>
+    <h2> Reports : </h2>
+    <div style="display:flex; flex-wrap: wrap; gap:10px; justify-content: center;">
+        <% for ( let i of student) { %>
+            <div
+                style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; background-color: #f9f9f9;">
+                <p style="font-weight: bold; color: #333;">Name: <%= i.name %>
+                </p>
+                <p style="color: #555;">Grade: <%= i.grade %>
+                </p>
+                <p style="color: #555;">Favourite Subject: <%= i.favouriteSubject %>
+                </p>
+            </div>
+            <br />
+            <% } %>
+    </div>
+
 </body>
+
 </html>
