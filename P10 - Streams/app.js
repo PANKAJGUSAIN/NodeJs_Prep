@@ -19,5 +19,10 @@ readableStream.on("data" , (chunk)=>{
     writeableStream.write(chunk);          // write each chunk to output file
 })
 
+readableStream.on("end" , ()=>{
+    console.log("File read completed.");
+    writeableStream.end();
+})
+
 readableStream.on("error" , (err)=> console.log(err));
 writeableStream.on("error" , (err)=> console.log(err));
