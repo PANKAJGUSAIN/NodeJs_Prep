@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.fileinputHandler {
+    background-color: beige;
+    border-radius: 8px;
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.fileinputHandler input{
+    display: none;
+}
+
+.fileinputHandler label{
+    height: 100%;
+    width: 100% ;
+    border-radius: 8px;
+    font-weight: 600;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: brown;
+}
+
+.fileinputHandler:hover::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    padding:5px;
+    z-index: -1;
+    animation: borderPopup 0.3s ease-in-out forwards;
+}
+
+@keyframes borderPopup {
+    from {
+        transform: scale(0);
+        border: 0px solid brown;
+    }
+    to {
+        transform: scale(1);
+        border: 5px solid brown;
+        
+    }
+}

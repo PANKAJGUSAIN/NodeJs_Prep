@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Bulk File Upload Handler</title>
+</head>
+
+<body>
+    <div class="fileinputHandler">
+        <label for="fileInput">
+            Upload File
+        </label>
+        <input type="file" id="fileInput">
+    </div>
+
+    <script>
+        var fileinput = document.getElementById('fileInput')
+        fileinput.addEventListener('change' , (e)=>{
+            console.log('data' , e.target.files[0])
+            let file = e.target.files[0];
+            let chunkSize = 1024 ; //1kb 
+            let start = 0 ;
+            let end = chunkSize;
+            let index = 0 ;
+            while(start < file.size){
+                const chunk = file.slice(start , end);
+                console.log(`Chunk ${index}:`, chunk);
+
+                start = end ;
+                end = start + chunkSize;
+                index++;
+            }
+
+            console.log('All chunks prepared!');
+        })
+    </script>
+
+
+</body>
+
+</html>
