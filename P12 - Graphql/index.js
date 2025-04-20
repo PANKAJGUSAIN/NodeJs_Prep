@@ -1,15 +1,47 @@
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4')
+const bodyParser = require('body-parser');
 const express = require('express');
-const { server } = require('./app');
+const cors = require('cors');
+const { default: axios } = require('axios');
 const app = express();
 
 async function startServer() {
 
-    await server.start();
+    const server = new ApolloServer({
+        typeDefs:`
+            type Todo{
+                id : ID!,
+                title : String!,
+                completed : Boolean
+            }
+            
+            type Query{
+                getTodos : [Todo],  
+            }
+        `,
+        resolvers:{
+            Query : {
+                getTodos:async()=>{
+                    const result = await axios.get('https://jsonplaceholder.typicode.com/todos');
+                    console.log(result.data);
+                    return result.data;
+                }
+            }
+        },
+    }) // create apollo server 
 
-    server.applyMiddleware({ app }); // 👈 Hook Apollo into Express
+    await server.start(); // Start Apollo server
+ 
+    app.use('/graphql',
+        cors(),
+        express.json(),
+        expressMiddleware(server ,{
+            context: async ({ req }) => ({})
+        }));
 
     app.listen(4848, () => {
-        console.log(`🚀 Server running at http://localhost:4848${server.graphqlPath}`);
+        console.log(`🚀 Server running at http://localhost:4848`);
     })
 
 }
