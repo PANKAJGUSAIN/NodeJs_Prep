@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "node --watch ./index.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.13.0",
+    "express": "^4.21.2",
+    "graphql": "^16.10.0"
+  }
+}
