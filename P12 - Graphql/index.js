@@ -25,6 +25,7 @@ async function startServer() {
                 title : String!,
                 completed : Boolean,
                 userId: ID!,
+                user : User,
             }
             
             type Query{
@@ -34,6 +35,15 @@ async function startServer() {
             }
         `,
         resolvers:{
+
+            Todo:{
+                user : async (todo) => {
+                    console.log(todo.userId);
+                    const result2 = await axios.get(`https://jsonplaceholder.typicode.com/users/${todo.userId}`);
+                    return result2.data;
+                }
+            },
+
             Query : {
                 getTodos:async()=>{
                     const result = await axios.get('https://jsonplaceholder.typicode.com/todos');
